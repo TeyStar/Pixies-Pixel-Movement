@@ -1,7 +1,7 @@
 const canvas = document.getElementById('pixelCanvas');
 const ctx = canvas.getContext('2d');
 
-let pixelSize = 1, areaSize = 20, speed = 5, pixelCount = 100, animationFrameId, soloMode = false;
+let pixelSize = 1, areaSize = 20, speed = 5, pixelCount = 100, animationFrameId, soloMode = true;
 const pixels = [], colors = ['red', 'green', 'blue'];
 
 document.getElementById('solo').checked = soloMode;
