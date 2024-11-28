@@ -10,11 +10,21 @@
             display: block;
             margin-top: 10px;
         }
+        .score {
+            margin-top: 10px;
+            display: none;
+        }
+        .score span {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
     <div>
         <input type="checkbox" id="solo"> Solo
+        <input type="checkbox" id="battle"> Battle Mode
+    </div>
+    <div>
         <label for="pixelSize">Pixel Size:</label>
         <input type="number" id="pixelSize" value="40" min="1">
         <label for="areaSize">Area Size:</label>
@@ -23,9 +33,20 @@
         <input type="number" id="speed" min="1" value="10" max="1000">
         <label for="pixelCount">Pixel Count per Color:</label>
         <input type="number" id="pixelCount" value="100" min="1">
+    </div>
+    <div>
         <button onclick="updateCanvas()">Update Canvas</button>
     </div>
     <canvas id="pixelCanvas" width="20" height="20"></canvas>
+    <div class="score" id="scoreBoard">
+        <span id="redScore" style="color: red;">Red: 0</span>
+        <span id="greenScore" style="color: green;">Green: 0</span>
+        <span id="blueScore" style="color: blue;">Blue: 0</span>
+        <span id="yellowScore" style="color: yellow;">Yellow: 0</span>
+        <span id="magentaScore" style="color: magenta;">Magenta: 0</span>
+        <span id="cyanScore" style="color: cyan;">Cyan: 0</span>
+    </div>
     <script src="script.js"></script>
+    <script src="battleMode.js"></script>
 </body>
 </html>
