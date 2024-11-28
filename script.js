@@ -6,6 +6,7 @@ let areaSize = 20;
 let speed = 5;
 let pixelCount = 100; // Default pixel count per color
 let animationFrameId;
+let soloMode = false;
 
 const pixels = [];
 const colors = ['red', 'green', 'blue'];
@@ -58,11 +59,18 @@ function blendColors(color1, color2) {
 
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (soloMode) {
+        const randomPixelIndex = Math.floor(Math.random() * pixels.length);
+        movePixel(pixels[randomPixelIndex]);
+    } else {
+        for (let i = 0; i < pixels.length; i++) {
+            movePixel(pixels[i]);
+        }
+    }
     for (let i = 0; i < pixels.length; i++) {
-        movePixel(pixels[i]);
         let displayColor = pixels[i].color;
-        for (let j = i + 1; j < pixels.length; j++) {
-            if (pixels[i].x === pixels[j].x && pixels[i].y === pixels[j].y) {
+        for (let j = 0; j < pixels.length; j++) {
+            if (i !== j && pixels[i].x === pixels[j].x && pixels[i].y === pixels[j].y) {
                 displayColor = blendColors(displayColor, pixels[j].color);
             }
         }
@@ -88,6 +96,9 @@ document.getElementById('areaSize').addEventListener('input', updateCanvas);
 document.getElementById('pixelCount').addEventListener('input', updateCanvas);
 document.getElementById('speed').addEventListener('input', () => {
     speed = parseInt(document.getElementById('speed').value);
+});
+document.getElementById('solo').addEventListener('change', (event) => {
+    soloMode = event.target.checked;
 });
 
 initializePixels();
