@@ -34,16 +34,21 @@ function blendColors(color1, color2) {
     return blendMap[color1 + color2] || blendMap[color2 + color1] || color1;
 }
 
+function checkWhitePixel(overlapColors) {
+    return overlapColors.size === 3 ? 'white' : null;
+}
+
 function checkOverlap() {
     pixels.forEach((pixel, i) => {
         let overlapColors = new Set([pixel.color]);
         pixels.forEach((otherPixel, j) => {
             if (i !== j && pixel.x === otherPixel.x && pixel.y === otherPixel.y) overlapColors.add(otherPixel.color);
         });
-        if (overlapColors.size === 3) {
-            pixel.color = 'white';
+        const whitePixel = checkWhitePixel(overlapColors);
+        if (whitePixel) {
+            pixel.displayColor = whitePixel;
         } else {
-            pixel.color = pixel.originalColor || (pixel.originalColor = pixel.color);
+            pixel.displayColor = pixel.color;
         }
     });
 }
@@ -53,7 +58,7 @@ function update() {
     (soloMode ? [pixels[Math.floor(Math.random() * pixels.length)]] : pixels).forEach(movePixel);
     checkOverlap();
     pixels.forEach(pixel => {
-        let displayColor = pixel.color;
+        let displayColor = pixel.displayColor || pixel.color;
         pixels.forEach(otherPixel => {
             if (pixel !== otherPixel && pixel.x === otherPixel.x && pixel.y === otherPixel.y) displayColor = blendColors(displayColor, otherPixel.color);
         });
@@ -61,6 +66,7 @@ function update() {
     });
     animationFrameId = setTimeout(() => requestAnimationFrame(update), 1000 / speed);
 }
+
 
 function updateCanvas() {
     pixelSize = parseInt(document.getElementById('pixelSize').value);
