@@ -1,6 +1,7 @@
 // battleMode.js
 
 let victories = { red: 0, green: 0, blue: 0, yellow: 0, magenta: 0, cyan: 0 };
+
 function getRandomChance() {
     return Math.random() * 100;
 }
@@ -19,6 +20,12 @@ function handleBattle(pixel, otherPixel) {
     }
 
     let chance = getRandomChance();
+    const underdogMode = document.getElementById('underdog').checked;
+
+    if (underdogMode) {
+        const victoryDifference = victories[pixel.color] - victories[otherPixel.color];
+        chance += victoryDifference;
+    }
 
     if (primaryColors.includes(pixel.color) && primaryColors.includes(otherPixel.color)) {
         if (chance < 65) {

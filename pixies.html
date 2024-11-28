@@ -9,7 +9,7 @@
             border: 1px solid black;
             display: block;
             margin-top: 10px;
-        background-color: #131313;
+            background-color: #131313;
         }
         .score {
             margin-top: 10px;
@@ -23,7 +23,10 @@
 <body>
     <div>
         <input type="checkbox" id="solo"> Solo
-        <input type="checkbox" id="battle"> Battle Mode
+        <input type="checkbox" id="battle" onclick="toggleUnderdog()"> Battle Mode
+        <span id="underdogContainer" style="display: none;">
+            <input type="checkbox" id="underdog"> Underdog
+        </span>
     </div>
     <div>
         <label for="pixelSize">Pixel Size:</label>
@@ -58,5 +61,11 @@
     </div>
     <script src="script.js"></script>
     <script src="battleMode.js"></script>
+    <script>
+        function toggleUnderdog() {
+            const underdogContainer = document.getElementById('underdogContainer');
+            underdogContainer.style.display = document.getElementById('battle').checked ? 'inline' : 'none';
+        }
+    </script>
 </body>
 </html>
