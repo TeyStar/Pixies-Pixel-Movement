@@ -23,7 +23,6 @@ function initializePixels() {
     });
 }
 
-
 function drawPixel(pixel) {
     ctx.fillStyle = pixel.color;
     ctx.fillRect(pixel.x * pixelSize, pixel.y * pixelSize, pixelSize, pixelSize);
@@ -99,6 +98,7 @@ document.getElementById('solo').addEventListener('change', (event) => soloMode =
 document.getElementById('battle').addEventListener('change', (event) => {
     battleMode = event.target.checked;
     document.getElementById('scoreBoard').style.display = battleMode ? 'block' : 'none';
+    document.getElementById('victoryBoard').style.display = battleMode ? 'block' : 'none';
 });
 
 initializePixels();
