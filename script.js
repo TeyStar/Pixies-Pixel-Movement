@@ -4,6 +4,7 @@ const ctx = canvas.getContext('2d');
 let pixelSize = 1;
 let areaSize = 20;
 let speed = 5;
+let pixelCount = 100; // Default pixel count per color
 let animationFrameId;
 
 const pixels = [];
@@ -13,17 +14,17 @@ function initializePixels() {
     pixels.length = 0; // Clear existing pixels
 
     // Initialize red pixels in the bottom left corner
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < pixelCount; i++) {
         pixels.push({ x: Math.floor(Math.random() * (areaSize / 2)), y: Math.floor(Math.random() * (areaSize / 2)) + areaSize / 2, color: 'red' });
     }
 
     // Initialize green pixels in the top right corner
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < pixelCount; i++) {
         pixels.push({ x: Math.floor(Math.random() * (areaSize / 2)) + areaSize / 2, y: Math.floor(Math.random() * (areaSize / 2)), color: 'green' });
     }
 
     // Initialize blue pixels in the bottom right corner
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < pixelCount; i++) {
         pixels.push({ x: Math.floor(Math.random() * (areaSize / 2)) + areaSize / 2, y: Math.floor(Math.random() * (areaSize / 2)) + areaSize / 2, color: 'blue' });
     }
 }
@@ -74,6 +75,7 @@ function updateCanvas() {
     pixelSize = parseInt(document.getElementById('pixelSize').value);
     areaSize = parseInt(document.getElementById('areaSize').value);
     speed = parseInt(document.getElementById('speed').value);
+    pixelCount = parseInt(document.getElementById('pixelCount').value);
     canvas.width = areaSize * pixelSize;
     canvas.height = areaSize * pixelSize;
     initializePixels();
@@ -83,6 +85,7 @@ function updateCanvas() {
 
 document.getElementById('pixelSize').addEventListener('input', updateCanvas);
 document.getElementById('areaSize').addEventListener('input', updateCanvas);
+document.getElementById('pixelCount').addEventListener('input', updateCanvas);
 document.getElementById('speed').addEventListener('input', () => {
     speed = parseInt(document.getElementById('speed').value);
 });
